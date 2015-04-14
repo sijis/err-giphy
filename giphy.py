@@ -52,7 +52,7 @@ class Giphy(BotPlugin):
             response = None
             while response is None:
                 image_number = random.randrange(0, results_count)
-                image_size = results['data'][image_number]['images'][gif_size]['size']
+                image_size = int(results['data'][image_number]['images'][gif_size]['size'])
                 # Restricting to max size limit
                 if image_size < max_image_size:
                     response = results['data'][image_number]['images'][gif_size]['url']
