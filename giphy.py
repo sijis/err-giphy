@@ -33,6 +33,7 @@ class Giphy(BotPlugin):
 
         api_key = self._check_config('api_key') or 'dc6zaTOxFJmzC'
         gif_size = 'original'
+        max_image_size = 8000000
 
         params = {
             'q': args,
@@ -48,8 +49,13 @@ class Giphy(BotPlugin):
         log.debug('results found: {}'.format(results_count))
 
         if results_count != 0:
-            image_number = random.randrange(0, results_count)
-            response = results['data'][image_number]['images'][gif_size]['url']
+            response = None
+            while response is None:
+                image_number = random.randrange(0, results_count)
+                image_size = results['data'][image_number]['images'][gif_size]['size']
+                # Restricting to max size limit
+                if image_size < max_image_size:
+                    response = results['data'][image_number]['images'][gif_size]['url']
         else:
             response = 'No results found.'
 
