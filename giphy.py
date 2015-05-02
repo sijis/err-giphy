@@ -44,7 +44,7 @@ class Giphy(BotPlugin):
 
         params = {
             'q': args,
-            'limit': 100,
+            'limit': 20,
             'api_key': api_key,
         }
 
