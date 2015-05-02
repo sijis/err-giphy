@@ -27,11 +27,14 @@ class Giphy(BotPlugin):
             else:
                 return None
 
+    def _get_api_key(self):
+        return self._check_config('api_key') or 'dc6zaTOxFJmzC'
+
     @botcmd
     def giphy(self, msg, args):
         """ Return a gif based on search """
 
-        api_key = self._check_config('api_key') or 'dc6zaTOxFJmzC'
+        api_key = self._get_api_key()
         gif_size = 'original'
         max_image_size = 8000000
 
