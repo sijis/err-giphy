@@ -71,3 +71,38 @@ class Giphy(BotPlugin):
                   message_type=msg.type,
                   in_reply_to=msg,
                   groupchat_nick_reply=True)
+
+    @botcmd
+    def giphy_ids(self, msg, args):
+        """ Return a gif based on ids
+            Example:
+            !giphy ids 7rzbxdu0ZEXLy
+            !giphy ids feqkVgjJpYtjy,7rzbxdu0ZEXLy
+        """
+
+        api_key = self._get_api_key()
+        gif_size = 'original'
+        response = ''
+
+        params = {
+            'api_key': api_key,
+            'ids': args,
+        }
+
+        r = requests.get('http://api.giphy.com/v1/gifs', params=params)
+        log.debug('url sent: {}'.format(r.url))
+
+        results = r.json()
+        results_count = len(results['data'])
+
+        if results_count != 0:
+            for image in range(0, results_count):
+                response += '{} '.format(results['data'][image]['images'][gif_size]['url'])
+        else:
+            response = 'No results found.'
+
+        self.send(msg.frm,
+                  response,
+                  message_type=msg.type,
+                  in_reply_to=msg,
+                  groupchat_nick_reply=True)
