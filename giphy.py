@@ -32,7 +32,11 @@ class Giphy(BotPlugin):
 
     @botcmd
     def giphy(self, msg, args):
-        """ Return a gif based on search """
+        """ Return a gif based on search
+            Example:
+            !giphy funny cats
+            !giphy dance
+        """
 
         api_key = self._get_api_key()
         gif_size = 'original'
