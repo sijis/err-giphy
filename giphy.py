@@ -2,9 +2,7 @@ from errbot import BotPlugin, botcmd
 
 import requests
 import random
-import logging
 
-log = logging.getLogger(name='errbot.plugins.Giphy')
 
 class Giphy(BotPlugin):
 
@@ -49,11 +47,11 @@ class Giphy(BotPlugin):
         }
 
         r = requests.get('http://api.giphy.com/v1/gifs/search', params=params)
-        log.debug('url sent: {}'.format(r.url))
+        self.log.debug('url sent: {}'.format(r.url))
 
         results = r.json()
         results_count = len(results['data'])
-        log.debug('results found: {}'.format(results_count))
+        self.log.debug('results found: {}'.format(results_count))
 
         if results_count != 0:
             response = None
@@ -90,7 +88,7 @@ class Giphy(BotPlugin):
         }
 
         r = requests.get('http://api.giphy.com/v1/gifs', params=params)
-        log.debug('url sent: {}'.format(r.url))
+        self.log.debug('url sent: {}'.format(r.url))
 
         results = r.json()
         results_count = len(results['data'])
