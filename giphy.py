@@ -64,11 +64,7 @@ class Giphy(BotPlugin):
         else:
             response = 'No results found.'
 
-        self.send(msg.frm,
-                  response,
-                  message_type=msg.type,
-                  in_reply_to=msg,
-                  groupchat_nick_reply=True)
+        return response
 
     @botcmd
     def giphy_ids(self, msg, args):
@@ -99,8 +95,4 @@ class Giphy(BotPlugin):
         else:
             response = 'No results found.'
 
-        self.send(msg.frm,
-                  response,
-                  message_type=msg.type,
-                  in_reply_to=msg,
-                  groupchat_nick_reply=True)
+        return response
